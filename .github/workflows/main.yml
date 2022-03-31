@@ -1,0 +1,26 @@
+name: Tests
+on:
+  pull_request:
+    types: [
+        opened, # when PR is initially opened
+        reopened, # when opening a PR that was previously closed
+        synchronize, # when new commits are pushed to an open PR
+        labeled, # New label attached to the PR
+      ]
+    branches: # these are the PR target branches
+      - "*"
+jobs:
+  build:
+    runs-on: [self-hosted, Linux]
+    steps:
+      - name: Temp fix 
+        run: sudo chown -Rf $USER:$USER /actions-runner/_work/coverage-test/coverage-test/coverage/ || true
+
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Install
+        run: yarn install
+
+      - name: Test
+        run: yarn test
