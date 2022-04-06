@@ -11,7 +11,7 @@ on:
       - "*"
 jobs:
   build:
-    runs-on: [self-hosted, Linux]
+    runs-on: ubuntu-latest
     steps:
       - name: Temp fix 
         run: sudo chown -Rf $USER:$USER /actions-runner/_work/coverage-test/coverage-test/coverage/ || true
